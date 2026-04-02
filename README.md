@@ -8,7 +8,7 @@ FinDash provides a rich suite of dashboard tooling with smooth interactions, eli
 
 - **Dashboard Intelligence**: Fast tracking of Total Balances, overall Income, and total Expenses via radiant summary cards.
 - **Dynamic Visualizations**: 
-  - *Bar Chart*: Tracks the 14-day trailing transaction dataset (Income vs Expense) directly derived from your global store.
+  - *Bar Chart*: Tracks the transaction dataset (Income vs Expense) directly derived from your global store.
   - *Pie Chart*: Categorizes real-time expenses with beautiful neon segmenting.
 - **Robust Transaction Ledger**: 
   - Seamless text filtering by category or transaction type (Income/Expense).
@@ -58,10 +58,8 @@ Our stack relies strictly on heavily adopted, robust libraries handling complex 
 2. **Responsiveness**: Used deep Tailwind grid alignments (`md:grid-cols-2`, `sm:flex-row`) to ensure fluid navigation on mobile displays.
 3. **Functionality**: Complete lifecycle features included (CRUD for admins, real-time recalculations for Insights and Charts, fully fleshed out active filters).
 4. **User Experience**: Removed abrupt rendering blocks; everything slides locally with subtle `scale-[0.98]` click animations. Custom thin scrollbars built natively.
-5. **Technical Quality**: Simplified everything by heavily removing abstract map-wrappers (`utils/cn.js` and `Card/Button` wrappers are completely gone) directly in favor of flat inline CSS styling.
-6. **State Management**: Zero prop-drilling! Handled 100% top-down via `useFinanceStore.js`.
-7. **Documentation**: You are reading it!
-8. **Attention to Detail**: Standardized **Day Month Year** (`15 Mar 2024`) universally across charts, recent transactions, and tools via a dedicated `dateFormatter.js`. Empty filters render graceful "No transactions found" notifications.
+5. **State Management**: Zero prop-drilling! Handled 100% top-down via `useFinanceStore.js`.
+6. **Documentation**: You are reading it!
+7. **Attention to Detail**: Standardized **Day Month Year** (`15 Mar 2024`) universally across charts, recent transactions, and tools via a dedicated `dateFormatter.js`. Empty filters render graceful "No transactions found" notifications.
 
 ---
-*Developed for evaluation purposes.*
