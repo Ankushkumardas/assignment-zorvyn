@@ -54,8 +54,9 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-zinc-900/40 dark:bg-zinc-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-zinc-200/50 dark:border-zinc-800">
+    <div className="fixed inset-0 bg-transparent dark:bg-transparent backdrop-blur-2xl z-50 flex items-center justify-center p-4 transition-all">
+      <div className="absolute inset-0 bg-black/20 dark:bg-black/60 transition-opacity" onClick={onClose} />
+      <div className="relative bg-white/80 dark:bg-zinc-900/60 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-white/40 dark:border-white/10 z-10">
         <div className="flex justify-between items-center p-6 border-b border-zinc-100 dark:border-zinc-800/80">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 tracking-tight">
             {editTransaction ? 'Edit Transaction' : 'New Transaction'}
