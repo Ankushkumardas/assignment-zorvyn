@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFinanceStore } from '../../store/useFinanceStore';
 import { CATEGORIES } from '../../utils/mockData';
-import { Search, Trash2, Edit2, ArrowUpRight, ArrowDownRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Trash2, Edit2, ArrowUpRight, ArrowDownRight, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { formatDate } from '../../utils/dateFormatter';
+import * as XLSX from 'xlsx';
 
 export const TransactionList = ({ onEditClick }) => {
   const { 
@@ -64,6 +65,21 @@ export const TransactionList = ({ onEditClick }) => {
   );
 
 
+  const handleExportExcel = () => {
+    const data = sortedAndFilteredTransactions.map(tx => ({
+      Type: tx.type,
+      Category: tx.category,
+      Date: new Date(tx.date).toLocaleDateString(),
+      Amount: tx.amount
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Transactions");
+    
+    XLSX.writeFile(workbook, "transactions.xlsx");
+  };
+
   React.useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, typeFilter, categoryFilter, sortField, sortDirection]);
@@ -72,7 +88,17 @@ export const TransactionList = ({ onEditClick }) => {
     <div className="group relative overflow-hidden mt-8 transition-all duration-500 bg-white/70 dark:bg-zinc-900/50 backdrop-blur-xl border border-white/40 dark:border-white/5 rounded-2xl shadow-sm hover:shadow-xl dark:hover:shadow-none">
       <div className="absolute inset-0 bg-linear-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-transparent pointer-events-none" />
       <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-5 border-b border-zinc-200/40 dark:border-zinc-800/40">
-        <h3 className="text-lg font-medium tracking-tight text-zinc-900 dark:text-zinc-50">Recent Transactions</h3>
+        <div className="flex items-center gap-4">
+          <h3 className="text-lg font-medium tracking-tight text-zinc-900 dark:text-zinc-50">Recent Transactions</h3>
+          <button
+            onClick={handleExportExcel}
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-zinc-700 bg-white border border-zinc-200 rounded-lg hover:bg-zinc-50 hover:text-zinc-900 dark:bg-zinc-900/50 dark:border-zinc-700/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 transition-colors"
+          >
+            <Download className="w-4 h-4" />
+            <span className="hidden sm:inline">Export Excel</span>
+            <span className="sm:hidden">Export</span>
+          </button>
+        </div>
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <div className="relative flex-1 sm:flex-none">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
